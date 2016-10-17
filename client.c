@@ -26,34 +26,6 @@ int main(int argc, char *argv[])
         return 1;
     }
      
-    printf("Connected\n");
-
-    fflush(stdin);
-    printf("Enter filename to download: ");
-    scanf("%s" , message);
-    fflush(stdin);
-    printf("Enter new filename: ");
-    scanf("%s" , savefile);
-         
-    if (send(sock , message , strlen(message) , 0) < 0) {
-        printf("Send failed\n");
-        return 1;
-    }
-     
-    int full_size = 0;
-    int already_read = 0;
-    int read_size = 0;
-    if ((read_size = recv(sock, &full_size, 4, 0)) < 0) {
-        printf("recv failed\n");
-        return 1;
-    }
-    printf("File length: %d\n", full_size);
-    FILE *file = fopen(savefile, "wb");
-    memset(server_reply, 0, BUF_SIZE);
-    while(already_read < full_size) {       
-        if ((read_size = recv(sock , server_reply , BUF_SIZE, 0)) < 0) {
-            printf("recv failed\n");
-            break;
         }
         fwrite(server_reply, sizeof(char), read_size, file);
         already_read += read_size;
