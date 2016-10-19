@@ -23,7 +23,13 @@ int main()
     }
     printf("Socket created\n");     
 
- 
+    server.sin_family = AF_INET;
+    server.sin_addr.s_addr = INADDR_ANY;
+    server.sin_port = htons(8888);
+
+    if (bind(socket_desc, (struct sockaddr *)&server, sizeof(server)) < 0) {
+        perror("Bind failed. Error");
+        return 1;
     }
     printf("bind done\n");     
 

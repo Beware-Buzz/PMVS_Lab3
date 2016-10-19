@@ -14,4 +14,4 @@ serverth: server.c
 	gcc -D BUF_SIZE=100 -pthread server.c -o serverth
 
 clean:
-	rm client serverth serverproc
+	rm -f client serverth serverproc
